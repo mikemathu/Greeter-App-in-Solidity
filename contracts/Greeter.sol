@@ -2,22 +2,27 @@
 
 // pragma solidity >= 0.4.0 < 0.7.0;
 pragma solidity >= 0.4.0;//compiler instruction, telling the Solidity compiler what version our code is compatible with
-contract Greeter { //data and functions/methods defined in here will be isolated to this contract 
+
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
+
+contract Greeter is Ownable { //data and functions/methods defined in here will be isolated to this contract 
     string private _greeting = 'Hello, World!'; //State Variable. Stores data in contract's persisted storage which exist for the entire lifetime of our contract.
 
     address private _owner;
 
-    constructor() public {
-        _owner = msg.sender;
-    }
+    // Before importing Openzeppelin
+    // constructor() public {
+    //     _owner = msg.sender;
+    // }
     
-    modifier onlyOwner() { //modifiers syntax looks like function but without the visibility declaration
-        require(
-        msg.sender == _owner,
-        "Ownable: caller is not the owner"
-        );
-        _; // where the function that is being modified will be called.
-       }
+    // Before importing Openzeppelin
+    // modifier onlyOwner() { //modifiers syntax looks like function but without the visibility declaration
+    //     require(
+    //     msg.sender == _owner,
+    //     "Ownable: caller is not the owner"
+    //     );
+    //     _; // where the function that is being modified will be called.
+    //    }
 
     function greet() external view returns(string memory) {
         return _greeting;
@@ -28,9 +33,10 @@ contract Greeter { //data and functions/methods defined in here will be isolated
     _greeting = greeting; 
     }
 
+    // Before importing Openzeppelin
     // Getter function to Add ownership
-    function owner() public view returns(address) {
-        return _owner;
-        }
+    // function owner() public view returns(address) {
+    //     return _owner;
+    //     }
        
 }
