@@ -23,7 +23,13 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+const HDWalletProvider = require("truffle-hdwallet-provider"); //adedd from page 98
+
 module.exports = {
+
+  contracts_build_directory: "client/src/contracts",  //makes the UI code accessible
+  // contracts_build_directory: "greeter/src/contracts",  //makes the UI code accessible
+
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -41,11 +47,15 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
+
+    // DEPLOYING TO GANACHE
     // development: {
     //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
+    // //  port: 8545,            // Standard Ethereum port (default: none)
+    //  port: 7545,            // Standard Ethereum port (default: none)
     //  network_id: "*",       // Any network (default: none)
     // },
+
     // Another network with more advanced options...
     // advanced: {
     // port: 8777,             // Custom port
@@ -71,6 +81,32 @@ module.exports = {
     // network_id: 2111,   // This network is yours, in the cloud.
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
+
+
+    // DEPLOYING TO GOERLI WITH PARITY
+    // goerli: {
+    //   provider: () => {
+    //   const mnemonic = process.env["MNEMONIC"]
+    //   // return new HDWalletProvider(mnemonic, "http://127.0.0.1:8545");
+    //   return new HDWalletProvider(mnemonic, "http://127.0.0.1:7545");
+    //   },
+    //   network_id: "*",
+    //  },
+
+
+
+    // DEPLOYING TO RINKEBY WITH INFURA
+     rinkeby: {
+      provider: () => {
+      const mnemonic = process.env["MNEMONIC"]
+      const project_id = process.env["INFURA_PROJECT_ID"]
+      return new HDWalletProvider(
+      mnemonic,
+      `https://rinkeby.infura.io/v3/${project_id}`
+      );
+      },
+      network_id: "*"
+     }
   },
 
   // Set default mocha options here, use special reporters etc.

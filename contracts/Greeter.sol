@@ -37,6 +37,5 @@ contract Greeter is Ownable { //data and functions/methods defined in here will 
     // Getter function to Add ownership
     // function owner() public view returns(address) {
     //     return _owner;
-    //     }
-       
+    //     }       
 }

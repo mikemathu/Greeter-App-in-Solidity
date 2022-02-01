@@ -11,6 +11,7 @@
 const GreeterContract = artifacts.require("Greeter");
 
 contract("Greeter", (accounts) => {  //we pass in the 'accounts' parameter to access to the accounts in out test environment
+  describe("deployment", () => {
     it("has been deployed successfully", async () => {
     const greeter = await GreeterContract.deployed();
     assert(greeter, "contract was not deployed");  
@@ -39,6 +40,7 @@ describe("owner()", () => {
         const expected = accounts[0];
         assert.equal(owner, expected, "matches address used to deploy contract");
         });       
+});
 });
 
 // MAKING THE CONTRACT DYNAMIC
